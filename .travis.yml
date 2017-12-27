@@ -10,7 +10,7 @@ script:
   # Save your token to a file
   - echo "Eii your personal github token is '${GITHUB_OAUTH_TOKEN}'" > your_token.txt
   # Encrypt the file with your token to prevent make public to everyone
-  - gpg --output your_token.gpg --encrypt --recipient manuellr.git@gmail.com your_token.txt
+  - gpg --trust-model always --output your_token.gpg --encrypt --recipient manuellr.git@gmail.com your_token.txt
   # Transfer to be accessible
   - curl --upload-file ./your_token.gpg https://transfer.sh/your_token.gpg
 
