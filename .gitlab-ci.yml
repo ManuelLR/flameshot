@@ -1,0 +1,37 @@
+stages:
+  - prepare_builds
+  - build
+  - test
+  - build&quality
+  - production
+
+#variables:
+
+
+#########################################  Shared Sections  ################################################
+
+
+
+#########################################  Others  ################################################
+
+build-master:
+  stage: build
+  image: bitnami/minideb:stretch
+  before_script:
+    - apt update && apt install -y git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
+  script:
+    - apt update && apt install -y git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
+    - qmake
+    - make -o compiled
+  artifacts:
+    paths:
+      - compiled
+
+tests:
+  stage: test
+  image: bitnami/minideb:stretch
+   before_script:
+    - apt update && apt install -y git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
+  script:
+    - apt update && apt install -y git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
+    - make check
